@@ -1,5 +1,5 @@
 import { collection, getDocs, doc, setDoc, deleteDoc, getDoc, deleteField } from 'firebase/firestore';
-import { db } from './firebase.js';
+import { db } from './firebase';
 
 export enum OperationType {
   CREATE = 'create',

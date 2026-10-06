@@ -1,4 +1,4 @@
-import app from '../server.js';
+import app from '../server';
 
 export default async function handler(req: any, res: any) {
   // Restore full path if rewritten by Vercel

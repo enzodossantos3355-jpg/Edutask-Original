@@ -8,8 +8,8 @@ import fs from 'fs';
 import os from 'os';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
-import { whatsappService } from './whatsapp-service.js';
-import { firebaseService } from './src/lib/firebaseService.js';
+import { whatsappService } from './whatsapp-service';
+import { firebaseService } from './src/lib/firebaseService';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
