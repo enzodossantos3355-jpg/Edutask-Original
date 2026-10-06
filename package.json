@@ -5,11 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch server.ts",
-    "build": "vite build",
-    "build:server": "esbuild server.ts --bundle --platform=node --format=esm --packages=external --outfile=server.js",
+    "build": "npx --yes vite build",
     "start": "tsx server.ts",
     "preview": "vite preview",
-    "clean": "rm -rf dist server.js",
+    "clean": "rm -rf dist",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
@@ -38,7 +37,6 @@
     "cookie-parser": "^1.4.7",
     "date-fns": "^4.4.0",
     "dotenv": "^17.2.3",
-    "esbuild": "^0.25.0",
     "express": "^4.21.2",
     "firebase": "^12.19.0",
     "jsonwebtoken": "^9.0.3",
