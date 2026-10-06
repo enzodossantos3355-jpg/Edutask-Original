@@ -4,16 +4,7 @@ import { db } from "@/lib/firebase";
 import api from "@/lib/api";
 import { useAuth } from "@/context/AuthContext";
 
-interface AIStatusContextType {
-  enabled: boolean;
-  aiEnabled: boolean;
-  loading: boolean;
-  refresh: () => Promise<void>;
-  toggleAI: (newStatus: boolean) => Promise<boolean>;
-  setEnabled: (val: boolean) => void;
-}
-
-const AIStatusContext = createContext<AIStatusContextType>({
+const AIStatusContext = createContext({
   enabled: true,
   aiEnabled: true,
   loading: true,
@@ -22,12 +13,12 @@ const AIStatusContext = createContext<AIStatusContextType>({
   setEnabled: () => {},
 });
 
-export function AIStatusProvider({ children }: { children: React.ReactNode }) {
+export function AIStatusProvider({ children }) {
   const { user } = useAuth();
-  const [enabled, setEnabledState] = useState<boolean>(true);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [enabled, setEnabledState] = useState(true);
+  const [loading, setLoading] = useState(true);
 
-  const setEnabled = useCallback((val: boolean) => {
+  const setEnabled = useCallback((val) => {
     setEnabledState(Boolean(val));
   }, []);
 
@@ -51,7 +42,7 @@ export function AIStatusProvider({ children }: { children: React.ReactNode }) {
 
   // 2. Real-Time Firestore Synchronization for Instant Multi-Device / Multi-Tab Updates
   useEffect(() => {
-    let unsubscribeSystem: (() => void) | null = null;
+    let unsubscribeSystem = null;
 
     try {
       const systemDocRef = doc(db, "settings", "system");
@@ -81,7 +72,7 @@ export function AIStatusProvider({ children }: { children: React.ReactNode }) {
 
   // 3. Global Toggle Function with Firestore & Backend Persistence
   const toggleAI = useCallback(
-    async (newStatus: boolean): Promise<boolean> => {
+    async (newStatus) => {
       // Optimistic update
       setEnabledState(newStatus);
       try {
